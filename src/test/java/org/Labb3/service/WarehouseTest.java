@@ -90,7 +90,6 @@ class WarehouseTest {
         warehouse.addProduct(6, "DDD", categories.HEAVY_METAL);
 
         List<ProductDto> categoryRes = warehouse.getProductsByCategory(searchInput);
-
         for (ProductDto prod : categoryRes) {
             assertEquals(prod.category().toString(), searchInput);
         }
@@ -111,7 +110,6 @@ class WarehouseTest {
         warehouse.addProduct(6, "B-produkt", categories.OPERA);
 
         Map<Character, Long> res = warehouse.ammountOfProductsByFirstLetter();
-
         assertEquals(2, res.get('A'));
         assertEquals(3, res.get('B'));
         assertEquals(1, res.get('C'));
@@ -137,7 +135,6 @@ class WarehouseTest {
         warehouse.addProduct(5 , "PROD3", categories.CLASSIC);
 
         var map = warehouse.getCategoriesWithContent();
-
         assertEquals(3, map.get(categories.valueOf("DISCO")).size());
         assertEquals(2, map.get(categories.valueOf("CLASSIC")).size());
         assertEquals(2, map.size());
@@ -160,10 +157,7 @@ class WarehouseTest {
                     .equals(YearMonth.now(mockClock))
                     && prod.rating() == 10
             );
-
         }
-
-
     }
 
 
