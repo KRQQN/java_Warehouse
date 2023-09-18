@@ -1,48 +1,56 @@
 package org.Labb3.entities;
 
+import org.Labb3.enums.categories;
+import org.jetbrains.annotations.TestOnly;
+import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public final class Product {
+public class Product {
 
-    private final int id;
-    private String name;
-    private String category;
-    private int rating;
-    private final LocalDateTime created;
-    private LocalDateTime[] modified;
     private static int productsCreated;
+    private final int id;
+    private final LocalDateTime created;
+    private String name;
+    private categories category;
+    private int rating;
+    private LocalDateTime modified;
 
-    public Product(String name, String category) {
+    public Product(String name, categories category) {
         productsCreated++;
         this.id = productsCreated;
         this.name = name;
         this.category = category;
         this.created = LocalDateTime.now();
+        this.modified = created;
     }
 
-
-    public void test () {
-        System.out.println("test");
-    }
-
-    public Product setName(String name) {
+    @TestOnly
+    public Product(int id, String name, categories category, Clock mockClock) {
+        productsCreated++;
+        this.id = id;
         this.name = name;
-        return this;
-    }
-
-    public Product setCategory(String category) {
         this.category = category;
-        return this;
+        this.created = LocalDateTime.now(mockClock);
+        this.modified = created;
     }
 
-    public Product setRating(int rating) {
-        this.rating = rating;
-        return this;
+    @TestOnly
+    public Product(int id, String name, categories category) {
+        productsCreated++;
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.created = LocalDateTime.now();
+        this.modified = created;
     }
 
-    public void setModified() {
-        this.modified = modified;
+    public static int getProductsCreated() {
+        return productsCreated;
+    }
+
+    public Product setModified() {
+        this.modified = LocalDateTime.now();
+        return this;
     }
 
     public int getId() {
@@ -53,24 +61,35 @@ public final class Product {
         return name;
     }
 
-    public String getCategory() {
+    public Product setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public categories getCategory() {
         return category;
+    }
+
+    public Product setCategory(categories category) {
+        this.category = category;
+        return this;
     }
 
     public int getRating() {
         return rating;
     }
 
+    public Product setRating(int rating) {
+        this.rating = rating;
+        return this;
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }
 
-    public LocalDateTime[] getModified() {
+    public LocalDateTime getModified() {
         return modified;
-    }
-
-    public static int getProductsCreated() {
-        return productsCreated;
     }
 
     @Override
