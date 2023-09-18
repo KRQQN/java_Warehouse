@@ -46,7 +46,7 @@ public final class Warehouse {
     public boolean addProduct(int id, @NotNull String name, @NotNull categories category) {
         boolean res = validStrLength.test(name);
 
-        if (res) products.add(new Product(id, name, category));
+        if (res && findProductById(id).isEmpty()) products.add(new Product(id, name, category));
         return res;
     }
 
